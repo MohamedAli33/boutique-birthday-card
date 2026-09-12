@@ -20,38 +20,39 @@
   html,body{background:#111; height:100%;}
   body{font-family:"Montserrat",sans-serif;}
 
-  /* ---------- responsive stage: scales the fixed-size card to fit any screen ---------- */
+  /* ---------- responsive stage: pure CSS, no JS -----------
+     .card-page keeps its 1199x1600 design ratio via aspect-ratio
+     and never grows past 1199px. It is declared a query container
+     (container-type: inline-size) so every measurement inside it
+     is written in "cqw" (1cqw = 1% of the container's own width).
+     That makes the whole card scale uniformly at any screen size,
+     purely through CSS — no transform, no JS, no resize listener. */
   .stage{
     width:100%;
     min-height:100vh;
     display:flex;
     align-items:flex-start;
     justify-content:center;
-    overflow:hidden;
     background:#111;
     padding:16px 0;
-  }
-  .stage-inner{
-    position:relative;
-    flex:none;
   }
 
   .card-page{
     position:relative;
-    width:1199px;
-    height:1600px;
+    width:min(100%, 1199px);
+    aspect-ratio:1199 / 1600;
     background:var(--bg);
     overflow:hidden;
     color:var(--white);
-    transform-origin: top left;
-    box-shadow:0 20px 60px rgba(0,0,0,.5);
+    box-shadow:0 1.6681cqw 5.0042cqw rgba(0,0,0,.5);
+    container-type:inline-size;
   }
 
   /* ---------- decorative ghost balloons (very subtle, behind everything) ---------- */
   .ghost{
     position:absolute;
     border-radius:50%;
-    border:1.5px solid var(--bg-ghost);
+    border:0.1251cqw solid var(--bg-ghost);
   }
 
   /* ---------- balloons ---------- */
@@ -59,14 +60,14 @@
   .balloon .ring{
     display:block;
     border-radius:50%;
-    border:2px solid var(--rose);
+    border:0.1668cqw solid var(--rose);
     background:transparent;
   }
   .balloon .string{
     position:absolute;
     left:50%;
     top:100%;
-    width:1px;
+    width:0.0834cqw;
     background:var(--rose);
     transform:translateX(-50%);
   }
@@ -74,15 +75,15 @@
     position:absolute;
     left:50%;
     top:100%;
-    width:6px;height:6px;
+    width:0.5004cqw;height:0.5004cqw;
     border-radius:50%;
-    border:1.5px solid var(--rose);
+    border:0.1251cqw solid var(--rose);
     transform:translate(-50%,-50%);
   }
   .bubble{
     position:absolute;
     border-radius:50%;
-    border:1.5px solid var(--rose);
+    border:0.1251cqw solid var(--rose);
   }
 
   /* ---------- header / logo ---------- */
@@ -90,11 +91,11 @@
     position:relative;
     z-index:3;
     text-align:center;
-    padding-top:64px;
+    padding-top:5.3378cqw;
   }
   .logo-svg-wrap{
     display:inline-block;
-    width:330px;
+    width:27.5229cqw;
     color:var(--rose);
   }
   .logo-svg-wrap svg{
@@ -107,35 +108,35 @@
     position:relative;
     z-index:3;
     text-align:center;
-    margin-top:56px;
+    margin-top:4.6706cqw;
   }
   .headline-ar{
     font-family:"Aref Ruqaa", serif;
     font-weight:700;
-    font-size:64px;
+    font-size:5.3378cqw;
     color:var(--white);
     direction:rtl;
-    letter-spacing:1px;
+    letter-spacing:0.0834cqw;
   }
   .headline-en{
     font-family:"Josefin Sans", sans-serif;
     font-weight:300;
-    font-size:56px;
-    letter-spacing:12px;
+    font-size:4.6706cqw;
+    letter-spacing:1.0008cqw;
     color:var(--white);
-    margin-top:10px;
+    margin-top:0.834cqw;
   }
 
   /* ---------- card panel ---------- */
   .panel-wrap{
     position:relative;
     z-index:4;
-    margin:250px auto 0;
-    width:820px;
+    margin:20.8507cqw auto 0;
+    width:68.3903cqw;
   }
   .panel{
     background:var(--cream);
-    padding:70px 56px 64px;
+    padding:5.8382cqw 4.6706cqw 5.3378cqw;
     clip-path:polygon(
       0% 6%, 5% 6%, 5% 0%, 95% 0%, 95% 6%, 100% 6%,
       100% 94%, 95% 94%, 95% 100%, 5% 100%, 5% 94%, 0% 94%
@@ -143,59 +144,59 @@
   }
   .panel-cols{
     display:flex;
-    gap:36px;
+    gap:3.0025cqw;
   }
   .col{ flex:1; min-width:0; }
-  .col-en{ text-align:left; border-right:1px solid rgba(169,130,120,0.35); padding-right:34px; }
-  .col-ar{ text-align:right; direction:rtl; padding-left:2px; }
+  .col-en{ text-align:left; border-right:0.0834cqw solid rgba(169,130,120,0.35); padding-right:2.8357cqw; }
+  .col-ar{ text-align:right; direction:rtl; padding-left:0.1668cqw; }
 
   .salutation{
     font-family:"Cormorant Garamond", serif;
     font-weight:500;
-    font-size:26px;
+    font-size:2.1685cqw;
     color:var(--card-text);
-    margin-bottom:22px;
+    margin-bottom:1.8349cqw;
   }
   .salutation-ar{
     font-family:"Aref Ruqaa", serif;
     font-weight:700;
-    font-size:24px;
+    font-size:2.0017cqw;
     color:var(--card-text);
-    margin-bottom:22px;
+    margin-bottom:1.8349cqw;
   }
   .card-text{
     font-family:"Montserrat", sans-serif;
     font-weight:300;
-    font-size:16.5px;
+    font-size:1.3761cqw;
     line-height:1.55;
     color:var(--card-text);
-    margin-bottom:18px;
+    margin-bottom:1.5013cqw;
   }
   .card-text-ar{
     font-family:"Tajawal", sans-serif;
     font-weight:400;
-    font-size:17px;
+    font-size:1.4178cqw;
     line-height:2;
     color:var(--card-text);
-    margin-bottom:18px;
+    margin-bottom:1.5013cqw;
     text-align:justify;
   }
   .highlight{
     font-family:"Montserrat", sans-serif;
     font-weight:700;
-    font-size:16.5px;
+    font-size:1.3761cqw;
     color:var(--rose);
     display:block;
-    margin-bottom:10px;
-    letter-spacing:.5px;
+    margin-bottom:0.834cqw;
+    letter-spacing:0.0417cqw;
   }
   .highlight-ar{
     font-family:"Tajawal", sans-serif;
     font-weight:700;
-    font-size:19px;
+    font-size:1.5847cqw;
     color:var(--rose);
     display:block;
-    margin-bottom:10px;
+    margin-bottom:0.834cqw;
   }
   .joy{ font-weight:600; color:var(--rose); }
 
@@ -204,11 +205,11 @@
     position:relative;
     z-index:4;
     text-align:center;
-    margin-top:56px;
+    margin-top:4.6706cqw;
     font-family:"Montserrat", sans-serif;
     font-weight:700;
-    font-size:15px;
-    letter-spacing:1px;
+    font-size:1.251cqw;
+    letter-spacing:0.0834cqw;
     color:var(--white);
   }
 
@@ -217,24 +218,24 @@
     z-index:4;
     display:flex;
     justify-content:space-between;
-    gap:40px;
-    margin-top:30px;
-    padding:0 70px;
+    gap:3.3361cqw;
+    margin-top:2.5021cqw;
+    padding:0 5.8382cqw;
   }
   .notes .col-en, .notes .col-ar{ flex:1; padding:0; border:none; }
   .note-title{
     font-family:"Montserrat", sans-serif;
     font-weight:700;
-    font-size:19px;
+    font-size:1.5847cqw;
     color:var(--white);
-    margin-bottom:12px;
+    margin-bottom:1.0008cqw;
   }
   .note-title-ar{
     font-family:"Tajawal", sans-serif;
     font-weight:700;
-    font-size:19px;
+    font-size:1.5847cqw;
     color:var(--white);
-    margin-bottom:12px;
+    margin-bottom:1.0008cqw;
     text-align:right;
     direction:rtl;
   }
@@ -243,96 +244,101 @@
     position:relative;
     font-family:"Montserrat", sans-serif;
     font-weight:300;
-    font-size:14.5px;
+    font-size:1.2093cqw;
     line-height:1.55;
     color:var(--white-soft);
-    padding-left:22px;
-    margin-bottom:14px;
+    padding-left:1.8349cqw;
+    margin-bottom:1.1676cqw;
   }
   .note-list li::before{
     content:"";
     position:absolute;
-    left:0; top:6px;
-    width:9px; height:9px;
-    border:1.5px solid var(--rose);
+    left:0; top:0.5004cqw;
+    width:0.7506cqw; height:0.7506cqw;
+    border:0.1251cqw solid var(--rose);
     border-radius:50%;
   }
   .note-list.ar{ direction:rtl; text-align:right; }
-  .note-list.ar li{ padding-left:0; padding-right:22px; }
+  .note-list.ar li{ padding-left:0; padding-right:1.8349cqw; }
   .note-list.ar li::before{ left:auto; right:0; }
   .note-list.ar li{
     font-family:"Tajawal", sans-serif;
     font-weight:400;
-    font-size:15px;
+    font-size:1.251cqw;
   }
 
   .footer{
     position:absolute;
     z-index:4;
-    left:0; right:0; bottom:34px;
+    left:0; right:0; bottom:2.8357cqw;
     display:flex;
     justify-content:space-between;
-    padding:0 60px;
-    font-size:12px;
-    letter-spacing:3px;
+    padding:0 5.0042cqw;
+    font-size:1.0008cqw;
+    letter-spacing:0.2502cqw;
     color:var(--rose);
     font-weight:600;
   }
-  .footer .ar{ font-family:"Tajawal", sans-serif; letter-spacing:6px; direction:rtl; }
+  .footer .ar{ font-family:"Tajawal", sans-serif; letter-spacing:0.5004cqw; direction:rtl; }
   .footer .en{ font-family:"Montserrat", sans-serif; }
+
+  /* Fallback for browsers without container-query units: the card
+     simply stays at its natural size and centers on the page. */
+  @supports not (width: 1cqw){
+    .card-page{ width:1199px; height:1600px; margin:0 auto; }
+  }
 </style>
 </head>
 <body>
 <div class="stage">
-<div class="stage-inner" id="stageInner">
-<div class="card-page" id="page">
+<div class="card-page">
 
   <!-- ghost decorative circles -->
-  <div class="ghost" style="width:260px;height:260px; left:-60px; top:520px;"></div>
-  <div class="ghost" style="width:180px;height:180px; left:120px; top:560px;"></div>
-  <div class="ghost" style="width:220px;height:220px; right:-70px; top:150px;"></div>
-  <div class="ghost" style="width:150px;height:150px; right:60px; top:60px;"></div>
-  <div class="ghost" style="width:200px;height:200px; left:520px; top:480px;"></div>
+  <div class="ghost" style="width:21.6847cqw;height:21.6847cqw; left:-5.0042cqw; top:43.3695cqw;"></div>
+  <div class="ghost" style="width:15.0125cqw;height:15.0125cqw; left:10.0083cqw; top:46.7056cqw;"></div>
+  <div class="ghost" style="width:18.3486cqw;height:18.3486cqw; right:-5.8382cqw; top:12.5104cqw;"></div>
+  <div class="ghost" style="width:12.5104cqw;height:12.5104cqw; right:5.0042cqw; top:5.0042cqw;"></div>
+  <div class="ghost" style="width:16.6806cqw;height:16.6806cqw; left:43.3695cqw; top:40.0334cqw;"></div>
 
   <!-- balloons -->
-  <div class="balloon" style="left:60px; top:470px; width:210px; height:230px;">
-    <span class="ring" style="width:210px;height:230px;"></span>
+  <div class="balloon" style="left:5.0042cqw; top:39.1993cqw; width:17.5146cqw; height:19.1827cqw;">
+    <span class="ring" style="width:17.5146cqw;height:19.1827cqw;"></span>
     <span class="knot"></span>
-    <span class="string" style="height:230px;"></span>
+    <span class="string" style="height:19.1827cqw;"></span>
   </div>
 
-  <div class="balloon" style="left:640px; top:250px; width:190px; height:210px;">
-    <span class="ring" style="width:190px;height:210px;"></span>
+  <div class="balloon" style="left:53.3778cqw; top:20.8507cqw; width:15.8465cqw; height:17.5146cqw;">
+    <span class="ring" style="width:15.8465cqw;height:17.5146cqw;"></span>
     <span class="knot"></span>
-    <span class="string" style="height:300px;"></span>
+    <span class="string" style="height:25.0209cqw;"></span>
   </div>
 
-  <div class="balloon" style="left:610px; top:540px; width:130px; height:145px;">
-    <span class="ring" style="width:130px;height:145px;"></span>
+  <div class="balloon" style="left:50.8757cqw; top:45.0375cqw; width:10.8424cqw; height:12.0934cqw;">
+    <span class="ring" style="width:10.8424cqw;height:12.0934cqw;"></span>
     <span class="knot"></span>
-    <span class="string" style="height:60px;"></span>
+    <span class="string" style="height:5.0042cqw;"></span>
   </div>
 
-  <div class="balloon" style="left:1010px; top:610px; width:170px; height:190px;">
-    <span class="ring" style="width:170px;height:190px;"></span>
+  <div class="balloon" style="left:84.2369cqw; top:50.8757cqw; width:14.1785cqw; height:15.8465cqw;">
+    <span class="ring" style="width:14.1785cqw;height:15.8465cqw;"></span>
     <span class="knot"></span>
-    <span class="string" style="height:90px;"></span>
+    <span class="string" style="height:7.5063cqw;"></span>
   </div>
 
-  <div class="balloon" style="left:-70px; top:900px; width:230px; height:250px;">
-    <span class="ring" style="width:230px;height:250px;"></span>
+  <div class="balloon" style="left:-5.8382cqw; top:75.0626cqw; width:19.1827cqw; height:20.8507cqw;">
+    <span class="ring" style="width:19.1827cqw;height:20.8507cqw;"></span>
     <span class="knot"></span>
-    <span class="string" style="height:140px;"></span>
+    <span class="string" style="height:11.6764cqw;"></span>
   </div>
 
   <!-- small bubbles -->
-  <div class="bubble" style="width:10px;height:10px; left:395px; top:520px;"></div>
-  <div class="bubble" style="width:8px;height:8px; left:520px; top:640px;"></div>
-  <div class="bubble" style="width:7px;height:7px; left:590px; top:460px;"></div>
-  <div class="bubble" style="width:12px;height:12px; left:960px; top:520px;"></div>
-  <div class="bubble" style="width:8px;height:8px; left:1105px; top:790px;"></div>
-  <div class="bubble" style="width:9px;height:9px; left:150px; top:1010px;"></div>
-  <div class="bubble" style="width:6px;height:6px; left:220px; top:1180px;"></div>
+  <div class="bubble" style="width:0.834cqw;height:0.834cqw; left:32.9441cqw; top:43.3695cqw;"></div>
+  <div class="bubble" style="width:0.6672cqw;height:0.6672cqw; left:43.3695cqw; top:53.3778cqw;"></div>
+  <div class="bubble" style="width:0.5838cqw;height:0.5838cqw; left:49.2077cqw; top:38.3653cqw;"></div>
+  <div class="bubble" style="width:1.0008cqw;height:1.0008cqw; left:80.0667cqw; top:43.3695cqw;"></div>
+  <div class="bubble" style="width:0.6672cqw;height:0.6672cqw; left:92.1601cqw; top:65.8882cqw;"></div>
+  <div class="bubble" style="width:0.7506cqw;height:0.7506cqw; left:12.5104cqw; top:84.2369cqw;"></div>
+  <div class="bubble" style="width:0.5004cqw;height:0.5004cqw; left:18.3486cqw; top:98.4153cqw;"></div>
 
   <div class="header">
     <div class="logo-svg-wrap" dir="ltr">
@@ -358,9 +364,9 @@
         <div class="col col-ar">
           <div class="salutation-ar">الزميلة منيرة،</div>
           <p class="card-text-ar">على بالك إننا بنخليك تداومين في يوم ميلادك بكره؟</p>
-          <span class="highlight-ar">أكيد لا!</span>
-          <p class="card-text-ar">ومن باب الامتنان لكل ما تقدمينه، تستاهلين نهديك يوم إجازة بكرة.</p>
-          <p class="card-text-ar">يوم ميلاد سعيد مقدماً!</p>
+          <span class="highlight-ar">أكــيــــــد لا!</span>
+          <p class="card-text-ar">ومــــن بــــاب الامـــتـــــنـــــان لـــكـــل مــــا تــــقــــدمــيــنــه، تـــســـتــاهــلــيــن نــهــديــك يـــوم إجـــازة بـــكـــرة.</p>
+          <p class="card-text-ar">يــــــوم مــــيــــلاد ســــعــــيــــد مــــقـــــدمـــــاً!</p>
         </div>
       </div>
     </div>
@@ -387,31 +393,10 @@
 
   <div class="footer">
     <span class="en">A STORY OF HERITAGE AND HOSPITALITY</span>
-    <span class="ar">قصة تراث وضيافة</span>
+    <span class="ar">قـــــصــــة تــــراث وضـــيـــافــــة</span>
   </div>
 
 </div>
 </div>
-</div>
-
-<script>
-  // scale the fixed 1199x1600 card to fit any screen width
-  const BASE_W = 1199, BASE_H = 1600;
-  const page = document.getElementById('page');
-  const stageInner = document.getElementById('stageInner');
-  const stage = document.querySelector('.stage');
-
-  function fitCard(){
-    const available = Math.max(stage.clientWidth - 32, 40); // 16px gutter on each side
-    const scale = available / BASE_W;
-    page.style.transform = 'scale(' + scale + ')';
-    stageInner.style.width = (BASE_W * scale) + 'px';
-    stageInner.style.height = (BASE_H * scale) + 'px';
-  }
-
-  window.addEventListener('resize', fitCard);
-  window.addEventListener('orientationchange', fitCard);
-  fitCard();
-</script>
 </body>
 </html>
