@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<title>Boutique Group — Happy Birthday Card</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Josefin+Sans:wght@200;300;400&family=Montserrat:wght@300;400;500;600;700&family=Aref+Ruqaa:wght@400;700&family=Tajawal:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#00242C;
+    --bg-ghost: rgba(0,15,20,0.35);
+    --cream:#ECE8E4;
+    --rose:#A98278;
+    --white:#F1F1EE;
+    --white-soft:#E8E8E5;
+    --card-text:#B18B82;
+  }
+  *{box-sizing:border-box; margin:0; padding:0;}
+  html,body{background:#111; height:100%;}
+  body{font-family:"Montserrat",sans-serif;}
+
+  /* ---------- responsive stage: scales the fixed-size card to fit any screen ---------- */
+  .stage{
+    width:100%;
+    min-height:100vh;
+    display:flex;
+    align-items:flex-start;
+    justify-content:center;
+    overflow:hidden;
+    background:#111;
+    padding:16px 0;
+  }
+  .stage-inner{
+    position:relative;
+    flex:none;
+  }
+
+  .card-page{
+    position:relative;
+    width:1199px;
+    height:1600px;
+    background:var(--bg);
+    overflow:hidden;
+    color:var(--white);
+    transform-origin: top left;
+    box-shadow:0 20px 60px rgba(0,0,0,.5);
+  }
+
+  /* ---------- decorative ghost balloons (very subtle, behind everything) ---------- */
+  .ghost{
+    position:absolute;
+    border-radius:50%;
+    border:1.5px solid var(--bg-ghost);
+  }
+
+  /* ---------- balloons ---------- */
+  .balloon{ position:absolute; }
+  .balloon .ring{
+    display:block;
+    border-radius:50%;
+    border:2px solid var(--rose);
+    background:transparent;
+  }
+  .balloon .string{
+    position:absolute;
+    left:50%;
+    top:100%;
+    width:1px;
+    background:var(--rose);
+    transform:translateX(-50%);
+  }
+  .balloon .knot{
+    position:absolute;
+    left:50%;
+    top:100%;
+    width:6px;height:6px;
+    border-radius:50%;
+    border:1.5px solid var(--rose);
+    transform:translate(-50%,-50%);
+  }
+  .bubble{
+    position:absolute;
+    border-radius:50%;
+    border:1.5px solid var(--rose);
+  }
+
+  /* ---------- header / logo ---------- */
+  .header{
+    position:relative;
+    z-index:3;
+    text-align:center;
+    padding-top:64px;
+  }
+  .logo-svg-wrap{
+    display:inline-block;
+    width:330px;
+    color:var(--rose);
+  }
+  .logo-svg-wrap svg{
+    display:block;
+    width:100%;
+    height:auto;
+  }
+
+  .headline{
+    position:relative;
+    z-index:3;
+    text-align:center;
+    margin-top:56px;
+  }
+  .headline-ar{
+    font-family:"Aref Ruqaa", serif;
+    font-weight:700;
+    font-size:64px;
+    color:var(--white);
+    direction:rtl;
+    letter-spacing:1px;
+  }
+  .headline-en{
+    font-family:"Josefin Sans", sans-serif;
+    font-weight:300;
+    font-size:56px;
+    letter-spacing:12px;
+    color:var(--white);
+    margin-top:10px;
+  }
+
+  /* ---------- card panel ---------- */
+  .panel-wrap{
+    position:relative;
+    z-index:4;
+    margin:250px auto 0;
+    width:820px;
+  }
+  .panel{
+    background:var(--cream);
+    padding:70px 56px 64px;
+    clip-path:polygon(
+      0% 6%, 5% 6%, 5% 0%, 95% 0%, 95% 6%, 100% 6%,
+      100% 94%, 95% 94%, 95% 100%, 5% 100%, 5% 94%, 0% 94%
+    );
+  }
+  .panel-cols{
+    display:flex;
+    gap:36px;
+  }
+  .col{ flex:1; min-width:0; }
+  .col-en{ text-align:left; border-right:1px solid rgba(169,130,120,0.35); padding-right:34px; }
+  .col-ar{ text-align:right; direction:rtl; padding-left:2px; }
+
+  .salutation{
+    font-family:"Cormorant Garamond", serif;
+    font-weight:500;
+    font-size:26px;
+    color:var(--card-text);
+    margin-bottom:22px;
+  }
+  .salutation-ar{
+    font-family:"Aref Ruqaa", serif;
+    font-weight:700;
+    font-size:24px;
+    color:var(--card-text);
+    margin-bottom:22px;
+  }
+  .card-text{
+    font-family:"Montserrat", sans-serif;
+    font-weight:300;
+    font-size:16.5px;
+    line-height:1.55;
+    color:var(--card-text);
+    margin-bottom:18px;
+  }
+  .card-text-ar{
+    font-family:"Tajawal", sans-serif;
+    font-weight:400;
+    font-size:17px;
+    line-height:2;
+    color:var(--card-text);
+    margin-bottom:18px;
+    text-align:justify;
+  }
+  .highlight{
+    font-family:"Montserrat", sans-serif;
+    font-weight:700;
+    font-size:16.5px;
+    color:var(--rose);
+    display:block;
+    margin-bottom:10px;
+    letter-spacing:.5px;
+  }
+  .highlight-ar{
+    font-family:"Tajawal", sans-serif;
+    font-weight:700;
+    font-size:19px;
+    color:var(--rose);
+    display:block;
+    margin-bottom:10px;
+  }
+  .joy{ font-weight:600; color:var(--rose); }
+
+  /* ---------- footer / notes ---------- */
+  .non-shareable{
+    position:relative;
+    z-index:4;
+    text-align:center;
+    margin-top:56px;
+    font-family:"Montserrat", sans-serif;
+    font-weight:700;
+    font-size:15px;
+    letter-spacing:1px;
+    color:var(--white);
+  }
+
+  .notes{
+    position:relative;
+    z-index:4;
+    display:flex;
+    justify-content:space-between;
+    gap:40px;
+    margin-top:30px;
+    padding:0 70px;
+  }
+  .notes .col-en, .notes .col-ar{ flex:1; padding:0; border:none; }
+  .note-title{
+    font-family:"Montserrat", sans-serif;
+    font-weight:700;
+    font-size:19px;
+    color:var(--white);
+    margin-bottom:12px;
+  }
+  .note-title-ar{
+    font-family:"Tajawal", sans-serif;
+    font-weight:700;
+    font-size:19px;
+    color:var(--white);
+    margin-bottom:12px;
+    text-align:right;
+    direction:rtl;
+  }
+  .note-list{ list-style:none; }
+  .note-list li{
+    position:relative;
+    font-family:"Montserrat", sans-serif;
+    font-weight:300;
+    font-size:14.5px;
+    line-height:1.55;
+    color:var(--white-soft);
+    padding-left:22px;
+    margin-bottom:14px;
+  }
+  .note-list li::before{
+    content:"";
+    position:absolute;
+    left:0; top:6px;
+    width:9px; height:9px;
+    border:1.5px solid var(--rose);
+    border-radius:50%;
+  }
+  .note-list.ar{ direction:rtl; text-align:right; }
+  .note-list.ar li{ padding-left:0; padding-right:22px; }
+  .note-list.ar li::before{ left:auto; right:0; }
+  .note-list.ar li{
+    font-family:"Tajawal", sans-serif;
+    font-weight:400;
+    font-size:15px;
+  }
+
+  .footer{
+    position:absolute;
+    z-index:4;
+    left:0; right:0; bottom:34px;
+    display:flex;
+    justify-content:space-between;
+    padding:0 60px;
+    font-size:12px;
+    letter-spacing:3px;
+    color:var(--rose);
+    font-weight:600;
+  }
+  .footer .ar{ font-family:"Tajawal", sans-serif; letter-spacing:6px; direction:rtl; }
+  .footer .en{ font-family:"Montserrat", sans-serif; }
+</style>
+</head>
+<body>
+<div class="stage">
+<div class="stage-inner" id="stageInner">
+<div class="card-page" id="page">
+
+  <!-- ghost decorative circles -->
+  <div class="ghost" style="width:260px;height:260px; left:-60px; top:520px;"></div>
+  <div class="ghost" style="width:180px;height:180px; left:120px; top:560px;"></div>
+  <div class="ghost" style="width:220px;height:220px; right:-70px; top:150px;"></div>
+  <div class="ghost" style="width:150px;height:150px; right:60px; top:60px;"></div>
+  <div class="ghost" style="width:200px;height:200px; left:520px; top:480px;"></div>
+
+  <!-- balloons -->
+  <div class="balloon" style="left:60px; top:470px; width:210px; height:230px;">
+    <span class="ring" style="width:210px;height:230px;"></span>
+    <span class="knot"></span>
+    <span class="string" style="height:230px;"></span>
+  </div>
+
+  <div class="balloon" style="left:640px; top:250px; width:190px; height:210px;">
+    <span class="ring" style="width:190px;height:210px;"></span>
+    <span class="knot"></span>
+    <span class="string" style="height:300px;"></span>
+  </div>
+
+  <div class="balloon" style="left:610px; top:540px; width:130px; height:145px;">
+    <span class="ring" style="width:130px;height:145px;"></span>
+    <span class="knot"></span>
+    <span class="string" style="height:60px;"></span>
+  </div>
+
+  <div class="balloon" style="left:1010px; top:610px; width:170px; height:190px;">
+    <span class="ring" style="width:170px;height:190px;"></span>
+    <span class="knot"></span>
+    <span class="string" style="height:90px;"></span>
+  </div>
+
+  <div class="balloon" style="left:-70px; top:900px; width:230px; height:250px;">
+    <span class="ring" style="width:230px;height:250px;"></span>
+    <span class="knot"></span>
+    <span class="string" style="height:140px;"></span>
+  </div>
+
+  <!-- small bubbles -->
+  <div class="bubble" style="width:10px;height:10px; left:395px; top:520px;"></div>
+  <div class="bubble" style="width:8px;height:8px; left:520px; top:640px;"></div>
+  <div class="bubble" style="width:7px;height:7px; left:590px; top:460px;"></div>
+  <div class="bubble" style="width:12px;height:12px; left:960px; top:520px;"></div>
+  <div class="bubble" style="width:8px;height:8px; left:1105px; top:790px;"></div>
+  <div class="bubble" style="width:9px;height:9px; left:150px; top:1010px;"></div>
+  <div class="bubble" style="width:6px;height:6px; left:220px; top:1180px;"></div>
+
+  <div class="header">
+    <div class="logo-svg-wrap" dir="ltr">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 366.21 179.89"><style>[dir=ltr] .text-ar{opacity:0}[dir=ltr] .text-en,[dir=rtl] .text-ar{opacity:1}[dir=rtl] .text-en{opacity:0}</style><path d="m188.37 61.29 6.56-2.72-.06 9.13zM194.87 67.7l-.06 9.14 6.56-2.72zM171.34 10.9l.06-9.13-6.56 2.71zM171.34 10.9l-.06 9.13 6.56-2.71zM211.51 51.07l-6.42-6.5-2.71 6.55zM211.51 51.07l6.41 6.49 2.72-6.55zM154.7 27.54l-6.41-6.5-2.72 6.55zM154.7 27.54l6.42 6.49 2.71-6.55zM211.51 27.54l-9.13-.06 2.71 6.55zM211.51 27.54l9.13.05-2.72-6.55zM154.7 51.07l-9.13-.06 2.72 6.55zM154.7 51.07l9.13.05-2.71-6.55zM194.87 10.9l-6.5 6.42 6.56 2.71zM194.87 10.9l6.5-6.42-6.56-2.71zM171.34 67.7l-6.5 6.42 6.56 2.72zM171.34 67.7l6.5-6.41-6.56-2.72zM183.1 0l-4.32 8.36 4.32 8.36 4.32-8.36zM183.1 61.89l-4.32 8.35 4.32 8.36 4.32-8.36zM155.31 11.51l2.86 8.97 8.97 2.85-2.86-8.96zM199.07 55.27l2.86 8.97 8.97 2.85-2.86-8.96zM143.8 39.3l8.36 4.32 8.36-4.32-8.36-4.32zM205.69 39.3l8.36 4.32 8.36-4.32-8.36-4.32zM155.31 67.09l8.97-2.85 2.86-8.97-8.97 2.86zM199.07 23.33l8.97-2.85 2.86-8.97-8.97 2.86z"></path><g class="text-ar"><path d="M31.59 118.59h-4.68v-.77c0-1.78.77-2.83 2-2.83.56 0 1.16.21 1.72.7l.63-.91a4 4 0 0 0-2.78-1.15c-2.04 0-3.45 1.68-3.45 4.13v.84h-1.55v1.19h8.09v-1.19ZM94.91 108.1c.88 0 1.65-.73 1.65-1.64s-.77-1.64-1.65-1.64-1.62.7-1.62 1.64.7 1.64 1.62 1.64M99.62 108.1c.88 0 1.62-.73 1.62-1.64a1.64 1.64 0 1 0-1.62 1.64M198.02 108.1a1.64 1.64 0 1 0 0-3.28c-.91 0-1.62.7-1.62 1.64s.7 1.64 1.62 1.64M193.2 108.1c.91 0 1.62-.73 1.62-1.64s-.7-1.64-1.62-1.64-1.65.7-1.65 1.64.74 1.64 1.65 1.64M60.88 136.09c-.91 0-1.62.73-1.62 1.64s.7 1.64 1.62 1.64 1.62-.7 1.62-1.64-.7-1.64-1.62-1.64M316.65 136.09a1.64 1.64 0 1 0 0 3.28c.91 0 1.62-.7 1.62-1.64s-.74-1.64-1.62-1.64M169.09 113.48H161v.42l1.2.49c.88.35 1.44 1.3 1.44 2.38v10.18c0 1.82-.98 2.8-2.81 2.8h-26.26v-12.98c0-1.08.56-2.03 1.44-2.38l1.19-.49v-.42h-9.67c-5.48 0-8.51 2.87-8.51 8.82s2.95 8.68 8.51 8.68h4.22c0 5-3.16 7.17-8.4 7.17h-2.92v1.22h3.2c6.61 0 10.93-2.76 10.93-8.4h28.72c2.04 0 3.16-1.12 3.16-3.15v-11.06c0-1.08.56-2.03 1.44-2.38l1.2-.49v-.42Zm-37.34 16.27h-3.87c-3.97 0-5.62-1.99-5.62-7.45s1.69-7.59 5.62-7.59h3.16q.7.01.7.7v14.35ZM239.5 130.98v-1.22h-8.05c-3.3 0-5.62-3.11-5.62-7.56s2.53-7.49 6.71-7.49c2.07 0 3.66 1.15 4.89 3.53l.7 1.33h.35v-6.09h-6.01c-5.8 0-9.88 3.71-9.88 8.71a8.3 8.3 0 0 0 4.53 7.56h-23.69c-2.04 0-3.16-1.12-3.16-3.15v-9.83c0-1.09.56-2.03 1.44-2.38l1.19-.49v-.42h-10.02c-5.48 0-8.51 3.57-8.51 8.82s2.95 8.68 8.51 8.68h46.61Zm-51.89-8.68c0-4.79 1.69-7.59 5.63-7.59h3.52q.7 0 .7.7v10.81c0 1.96.25 2.73 1.05 3.53h-5.27c-3.97 0-5.63-2.69-5.63-7.45M355.85 113.13c-6.08 0-8.4 3.25-8.4 8.15v2.9c0 3.67-1.51 5.56-4.5 5.56h-6.29c-2.74 0-3.87-1.12-3.87-3.85v-4.9c0-4.44-6.29-7.52-15.26-7.52q-7.48 0-12.69 2.8v4.69h.35l.7-1.33c1.69-3.18 5.94-4.93 11.57-4.93 7.24 0 12.52 2.87 12.52 6.65v5.74c0 1.22.18 2.1.91 2.66h-33.78c-3.13 0-4.5-2.1-4.5-6.72v-1.75c0-5-2.78-8.15-8.44-8.15s-8.44 3.15-8.44 8.15v1.75c0 4.62-1.37 6.72-4.5 6.72h-11.62v-12.98c0-1.09.53-1.99 1.44-2.38l1.19-.49v-.42h-10.02c-5.48 0-8.51 2.87-8.51 8.82s2.95 8.68 8.51 8.68h4.57c0 5-3.52 7.17-8.75 7.17h-2.92v1.23h3.2c6.61 0 11.28-2.76 11.28-8.4h11.66c3.11 0 4.74-.95 5.99-3.74 1.44 2.56 3.55 3.74 6.91 3.74s5.47-1.17 6.91-3.74c1.25 2.79 2.88 3.74 5.99 3.74h45.91c3.06 0 4.73-.89 6.02-3.33q2.42 3.32 7.87 3.33h3.59c2.04 0 3.16-1.12 3.16-3.15v-7.94c0-4.69-2.92-6.75-7.77-6.75Zm-99.06 16.62h-4.22c-3.97 0-5.63-1.99-5.63-7.45s1.69-7.59 5.63-7.59h3.52q.7 0 .7.7zm27.38-.1c-3.9 0-5.62-2.52-5.62-7.49s1.69-7.7 5.62-7.7 5.63 2.55 5.63 7.7-1.72 7.49-5.63 7.49m76.63-2.7c0 1.82-.98 2.8-2.81 2.8h-1.51c-4.08 0-6.22-2.34-6.22-6.79 0-5.98 1.34-8.5 5.59-8.5 3.23 0 4.96 1.54 4.96 5.07zM67.35 137.73a1.64 1.64 0 1 0-1.62 1.64c.91 0 1.62-.7 1.62-1.64"></path><path d="M112.66 127.83v-11.06c0-1.08.56-2.03 1.44-2.38l1.2-.49v-.42h-8.09v.42l1.19.49c.88.35 1.44 1.3 1.44 2.38v10.18c0 1.82-.98 2.8-2.81 2.8H85.02q-.7-.01-.7-.7v-12.28c0-1.08.56-2.03 1.44-2.38l1.2-.49v-.42h-8.09v.42l1.2.49c.88.35 1.44 1.3 1.44 2.38v12.28q-.01.69-.7.7H53.43q-.7-.01-.7-.7v-25.23c0-1.08.56-2.03 1.44-2.38l1.19-.49v-.42h-8.09v.42l1.2.49c.88.35 1.44 1.3 1.44 2.38v25.23q-.01.69-.7.7H8.22c-1.83 0-2.81-.98-2.81-2.8v-5.28c0-1.08.56-2.03 1.44-2.38l1.19-.49v-.42H3.3q-.7.01-.7.7v8.75c0 2.03 1.12 3.15 2.81 3.15h103.74c2.39 0 3.52-1.12 3.52-3.15ZM149.61 139.37c.91 0 1.62-.7 1.62-1.64s-.7-1.64-1.62-1.64a1.64 1.64 0 1 0 0 3.28M257.43 158.82c-4.28 0-8.42 3.23-8.42 8.7s3.74 8.65 8.32 8.65 8.45-3.22 8.45-8.64-3.94-8.71-8.35-8.71m.14 16.47c-3.84 0-6.51-3.48-6.51-8.15s2.57-7.43 6.11-7.43c3.84 0 6.54 3.47 6.54 8.14s-2.58 7.44-6.14 7.44M295.69 159.05h-6.91v.21l.65.39c.63.38.92 1 .92 1.65v12.41c0 .64-.29 1.26-.92 1.64l-.65.39v.21h5.1v-.21l-.64-.38a1.8 1.8 0 0 1-.93-1.56v-4.94c.92 0 1.49.03 2.73.03 4.01 0 6.09-2.18 6.09-5.15 0-2.55-1.5-4.69-5.44-4.69m-.75 8.97h-2.62v-8.13h2.85c2.26 0 3.9 1.39 3.9 4.09 0 3.63-2.96 4.03-4.13 4.03ZM281.45 159.26l.65.39c.63.38.92 1 .92 1.65v8.36c0 3.6-2.09 5.59-4.95 5.59-2.46 0-5.12-1.35-5.12-5.51v-8.44c0-.65.29-1.27.92-1.65l.65-.39v-.21h-5.1v.21l.65.39c.63.38.92 1 .92 1.65v8.35c0 4.56 2.97 6.53 6.62 6.53s6.23-2.28 6.23-6.66v-8.22c0-.65.29-1.27.92-1.65l.65-.39v-.21h-3.95zM242.34 171.73a60 60 0 0 1-2.64-3.8c2.5-.37 4.85-1.73 4.85-4.59s-1.72-4.29-5.39-4.29h-7v.21l.65.39c.63.38.92 1 .92 1.65v12.41c0 .64-.29 1.26-.92 1.64l-.65.39v.21h5.1v-.21l-.64-.38a1.8 1.8 0 0 1-.93-1.56V168c.32 0 1.16.02 1.73 0 1.06 1.62 2.16 3.12 3.49 4.98 2.12 2.96 4.01 3.31 6.03 3.21v-.21c-1.17-.32-2.31-1.21-4.59-4.25Zm-6.65-4.57v-7.26h3.44c1.96 0 3.32 1.39 3.32 3.65s-1.55 3.61-4.13 3.61zM224.04 168.03l.66.38c.66.38.93 1.01.93 1.66v3.36a5.8 5.8 0 0 1-4.45 1.91c-3.74 0-6.36-3.51-6.36-8.16s2.48-7.5 6.32-7.5c2.19 0 3.69.94 5.15 3.57l.51.92h.22v-4.12c-.86-.12-3.06-1.24-5.7-1.24a8.4 8.4 0 0 0-8.57 8.74c0 5.21 3.69 8.65 8.25 8.65 2.25 0 4.73-.73 6.58-2.11v-4.04c0-.65.13-1.34.64-1.72l.4-.3v-.21h-4.58zM180.8 159.26l.65.39c.63.38.92 1 .92 1.65v8.36c0 3.6-2.09 5.59-4.95 5.59-2.46 0-5.12-1.35-5.12-5.51v-8.44c0-.65.29-1.27.92-1.65l.65-.39v-.21h-5.1v.21l.65.39c.63.38.92 1 .92 1.65v8.35c0 4.56 2.97 6.53 6.62 6.53s6.23-2.28 6.23-6.66v-8.22c0-.65.29-1.27.92-1.65l.65-.39v-.21h-3.95zM90.63 158.82c-4.28 0-8.42 3.23-8.42 8.7s3.74 8.65 8.32 8.65 8.45-3.22 8.45-8.64-3.94-8.71-8.35-8.71m.14 16.47c-3.84 0-6.51-3.48-6.51-8.15s2.57-7.43 6.11-7.43c3.84 0 6.54 3.47 6.54 8.14s-2.58 7.44-6.14 7.44M188.12 159.26l.65.39c.63.38.92 1 .92 1.65v12.41c0 .64-.29 1.26-.92 1.64l-.65.39v.21h12.04v-3.5h-.21l-.64.91a3.7 3.7 0 0 1-3.36 1.76h-4.3v-7.27h3.8c1.13 0 1.82.38 2.47 1.34l.47.67h.15V165h-.15l-.47.68c-.65.96-1.34 1.34-2.47 1.34h-3.8v-7.11h4.3c1.53 0 2.48.5 3.36 1.77l.64.89h.21v-3.49h-12.04v.21ZM165.15 167.52c0-5.19-3.82-8.7-8.34-8.7s-8.42 3.23-8.42 8.7c0 5.12 3.62 8.59 8.15 8.67a13 13 0 0 0 6.81 3.7l.12-.23a11.4 11.4 0 0 1-4.32-3.78c3.52-.98 6-4.18 6-8.36m-8.17 7.78c-3.84 0-6.53-3.34-6.53-8.07s2.53-7.52 6.12-7.52c3.82 0 6.52 3.52 6.52 8.23 0 4.18-2.53 7.36-6.11 7.36M73.95 167.22a4.1 4.1 0 0 0 3.44-3.96c0-2.47-1.44-4.21-5.5-4.21h-6.82v.21l.65.39c.63.38.93 1 .93 1.65v12.41c0 .64-.3 1.26-.93 1.64l-.65.39v.21h6.92c4.13 0 6.22-1.88 6.22-4.71 0-2.23-1.67-3.74-4.25-4.01Zm-5.34-7.33h3.28c1.84 0 3.44 1.41 3.44 3.44s-1.37 3.53-3.46 3.53h-3.26zm3.3 15.22h-3.29v-7.42h3.28c2.76 0 4.23 1.53 4.23 3.71 0 1.88-1.19 3.71-4.22 3.71M114.62 159.26l.65.39c.64.38.93 1 .93 1.65v8.33c0 3.6-2.09 5.59-4.95 5.59-3.09 0-5.12-1.9-5.12-5.51v-8.41c0-.65.29-1.27.91-1.65l.65-.39v-.21h-5.1v.21l.66.39c.63.38.92 1 .92 1.65v8.35c0 4.17 2.62 6.53 6.62 6.53 3.79 0 6.23-2.28 6.23-6.66v-8.22c0-.65.29-1.27.92-1.65l.65-.39v-.21h-3.96v.21ZM121.73 162.44h.21l.64-.89a3.7 3.7 0 0 1 3.38-1.77h1.67v13.93c0 .64-.32 1.26-1.01 1.64l-.71.39v.21h5.42v-.21l-.72-.39c-.69-.38-1.01-1-1.01-1.64v-13.93h1.66c1.54 0 2.49.5 3.38 1.77l.63.89h.2v-3.39h-13.73zM139.63 159.26l.66.39c.63.38.92 1 .92 1.65v12.41c0 .64-.29 1.26-.92 1.64l-.66.39v.21h5.12v-.21l-.65-.39c-.64-.38-.93-1-.93-1.64V161.3c0-.65.29-1.27.93-1.65l.65-.39v-.21h-5.12z"></path></g><g class="text-en"><path d="M83.21 160.13q.55-.01 1.12.46l.41-.59a2.6 2.6 0 0 0-1.8-.75c-1.32 0-2.23 1.09-2.23 2.69v.55h-1v.77h5.24v-.77h-3.03v-.5c0-1.16.5-1.84 1.3-1.84ZM125.96 155.64c.57 0 1.07-.48 1.07-1.07s-.5-1.07-1.07-1.07-1.05.46-1.05 1.07.46 1.07 1.05 1.07M129.01 155.64c.57 0 1.05-.48 1.05-1.07s-.48-1.07-1.05-1.07a1.07 1.07 0 0 0 0 2.14M191.72 154.57c0 .59.46 1.07 1.05 1.07a1.07 1.07 0 0 0 0-2.14c-.59 0-1.05.46-1.05 1.07M189.65 155.64c.59 0 1.05-.48 1.05-1.07s-.46-1.07-1.05-1.07-1.07.46-1.07 1.07.48 1.07 1.07 1.07M103.91 173.86c-.59 0-1.05.48-1.05 1.07s.46 1.07 1.05 1.07 1.05-.46 1.05-1.07-.46-1.07-1.05-1.07M269.63 173.86a1.07 1.07 0 0 0 0 2.14c.59 0 1.05-.46 1.05-1.07s-.48-1.07-1.05-1.07M168.78 159.42l.77.32c.57.23.93.84.93 1.55v6.63c0 1.18-.64 1.82-1.82 1.82h-17.01v-8.45c0-.71.36-1.32.93-1.55l.77-.32v-.27h-6.26c-3.55 0-5.51 1.87-5.51 5.74s1.91 5.65 5.51 5.65h2.73c0 3.26-2.05 4.67-5.44 4.67h-1.89v.8h2.07c4.28 0 7.08-1.8 7.08-5.47h18.61c1.32 0 2.05-.73 2.05-2.05v-7.2c0-.71.36-1.32.93-1.55l.77-.32v-.27h-5.24v.27Zm-18.95 10.32h-2.51c-2.57 0-3.64-1.3-3.64-4.85s1.09-4.94 3.64-4.94h2.05q.46 0 .46.46v9.34ZM210.78 164.82c0-3.03 1.64-4.87 4.35-4.87q1.99-.01 3.17 2.3l.46.87h.23v-3.96h-3.89c-3.76 0-6.4 2.41-6.4 5.67a5.4 5.4 0 0 0 2.94 4.92h-15.35c-1.32 0-2.05-.73-2.05-2.05v-6.4c0-.71.36-1.32.93-1.55l.77-.32v-.27h-6.49c-3.55 0-5.51 2.32-5.51 5.74s1.91 5.65 5.51 5.65h30.2v-.8h-5.22c-2.14 0-3.64-2.03-3.64-4.92Zm-21.11 4.92c-2.57 0-3.64-1.75-3.64-4.85s1.09-4.94 3.64-4.94h2.28q.46 0 .46.46v7.04c0 1.28.16 1.78.68 2.3h-3.42ZM295.02 158.92c-3.94 0-5.44 2.12-5.44 5.31v1.89q0 3.6-2.91 3.62h-4.08c-1.78 0-2.51-.73-2.51-2.51v-3.19c0-2.89-4.08-4.9-9.89-4.9q-4.85.01-8.22 1.82v3.05h.23l.46-.87c1.09-2.07 3.85-3.21 7.49-3.21 4.69 0 8.11 1.87 8.11 4.33V168c0 .8.11 1.37.59 1.73h-21.89c-2.03 0-2.91-1.37-2.91-4.37v-1.14c0-3.26-1.8-5.31-5.47-5.31s-5.47 2.05-5.47 5.31v1.14c0 3.01-.89 4.37-2.92 4.37h-7.53v-8.45c0-.71.34-1.3.93-1.55l.77-.32v-.27h-6.49c-3.55 0-5.51 1.87-5.51 5.74s1.91 5.65 5.51 5.65h2.96c0 3.26-2.28 4.67-5.67 4.67h-1.89v.8h2.07c4.28 0 7.31-1.8 7.31-5.47h7.55c2.02 0 3.07-.62 3.88-2.43.93 1.67 2.3 2.43 4.48 2.43s3.54-.76 4.48-2.43c.81 1.81 1.86 2.43 3.88 2.43h29.75c1.98 0 3.06-.58 3.9-2.17q1.57 2.17 5.1 2.17h2.32c1.32 0 2.05-.73 2.05-2.05v-5.17c0-3.05-1.89-4.4-5.03-4.4Zm-64.17 10.82h-2.73c-2.57 0-3.64-1.3-3.64-4.85s1.09-4.94 3.64-4.94h2.28q.46 0 .46.46v9.34Zm17.73-.07c-2.53 0-3.64-1.64-3.64-4.87s1.09-5.01 3.64-5.01 3.64 1.66 3.64 5.01-1.12 4.87-3.64 4.87m49.66-1.75c0 1.18-.64 1.82-1.82 1.82h-.98c-2.64 0-4.03-1.53-4.03-4.42 0-3.89.87-5.53 3.62-5.53 2.1 0 3.21 1 3.21 3.3zM107.06 173.86a1.07 1.07 0 0 0 0 2.14c.59 0 1.05-.46 1.05-1.07s-.46-1.07-1.05-1.07"></path><path d="m133.93 159.42.77.32c.57.23.93.84.93 1.55v6.63c0 1.18-.64 1.82-1.82 1.82h-14.26q-.45 0-.46-.46v-7.99c0-.71.36-1.32.93-1.55l.77-.32v-.27h-5.24v.27l.77.32c.57.23.93.84.93 1.55v7.99q0 .45-.46.46H99.05q-.45 0-.46-.46v-16.42c0-.71.36-1.32.93-1.55l.77-.32v-.27h-5.24v.27l.77.32c.57.23.93.84.93 1.55v16.42q0 .45-.46.46H69.73c-1.18 0-1.82-.64-1.82-1.82v-3.44c0-.71.36-1.32.93-1.55l.77-.32v-.27h-3.07q-.45 0-.46.46v5.69c0 1.32.73 2.05 1.82 2.05h67.21c1.55 0 2.28-.73 2.28-2.05v-7.2c0-.71.36-1.32.93-1.55l.77-.32v-.27h-5.24v.27ZM161.4 173.86a1.07 1.07 0 0 0 0 2.14c.59 0 1.05-.46 1.05-1.07s-.46-1.07-1.05-1.07M298.41 104.5c-6.64 0-13.06 5.01-13.06 13.5s5.8 13.42 12.9 13.42 13.11-4.99 13.11-13.4-6.11-13.51-12.95-13.51Zm.23 25.54c-5.96 0-10.09-5.4-10.09-12.64s3.99-11.52 9.48-11.52c5.96 0 10.14 5.38 10.14 12.62s-4 11.54-9.53 11.54M357.77 104.86h-10.71v.32l1 .6a2.9 2.9 0 0 1 1.43 2.56v19.25c0 .99-.45 1.96-1.43 2.54l-1 .6v.32h7.91v-.32l-.99-.58a2.7 2.7 0 0 1-1.44-2.41v-7.66c1.43 0 2.32.05 4.23.05 6.22 0 9.45-3.39 9.45-7.99 0-3.95-2.33-7.28-8.44-7.28Zm-1.17 13.92h-4.07v-12.61h4.42c3.5 0 6.04 2.15 6.04 6.35 0 5.62-4.58 6.26-6.4 6.26ZM335.68 105.18l1.01.6a2.9 2.9 0 0 1 1.43 2.56v12.96c0 5.59-3.24 8.67-7.68 8.67-3.81 0-7.94-2.09-7.94-8.54v-13.09c0-1.01.45-1.98 1.43-2.56l1-.6v-.32h-7.91v.32l1.01.6a2.9 2.9 0 0 1 1.43 2.56v12.95c0 7.07 4.6 10.13 10.27 10.13s9.66-3.53 9.66-10.32v-12.75c0-1.01.45-1.98 1.43-2.56l1-.6v-.32h-6.12v.32ZM267.13 130.73l-.99-.58a2.7 2.7 0 0 1-1.44-2.41v-8.99c.5 0 1.8.03 2.68.01 1.65 2.52 3.35 4.84 5.41 7.72 3.29 4.59 6.22 5.14 9.35 4.98v-.32c-1.82-.5-3.58-1.88-7.11-6.59a97 97 0 0 1-4.1-5.9c3.87-.57 7.52-2.69 7.52-7.11s-2.67-6.66-8.36-6.66h-10.86v.32l1 .6a2.9 2.9 0 0 1 1.43 2.56v19.25c0 .99-.45 1.96-1.43 2.54l-1 .6v.32h7.91v-.32Zm-2.43-24.56h5.33c3.05 0 5.15 2.15 5.15 5.65s-2.4 5.61-6.4 5.61h-4.08zM241.91 131.48c3.48 0 7.34-1.13 10.21-3.27v-6.27c0-1.01.2-2.07.99-2.67l.62-.47v-.32h-7.1v.32l1.02.58a2.9 2.9 0 0 1 1.44 2.58v5.22a9 9 0 0 1-6.9 2.96c-5.8 0-9.87-5.44-9.87-12.65s3.84-11.63 9.8-11.63c3.4 0 5.72 1.46 7.99 5.54l.79 1.43h.34v-6.38c-1.33-.18-4.75-1.93-8.85-1.93-6.9 0-13.29 4.97-13.29 13.56 0 8.09 5.72 13.42 12.8 13.42ZM184.6 105.78l1-.6v-.32h-6.12v.32l1.01.6a2.9 2.9 0 0 1 1.43 2.56v12.96c0 5.59-3.24 8.67-7.68 8.67-3.81 0-7.94-2.09-7.94-8.54v-13.09a2.9 2.9 0 0 1 1.42-2.56l1.01-.6v-.32h-7.91v.32l1.01.6a2.9 2.9 0 0 1 1.42 2.56v12.95c0 7.07 4.6 10.13 10.27 10.13s9.66-3.53 9.66-10.32v-12.75c0-1.01.45-1.98 1.43-2.56ZM39.63 104.5c-6.64 0-13.06 5.01-13.06 13.5s5.8 13.42 12.9 13.42 13.11-4.99 13.11-13.4-6.11-13.51-12.95-13.51Zm.23 25.54c-5.96 0-10.09-5.4-10.09-12.64s3.99-11.52 9.48-11.52c5.96 0 10.14 5.38 10.14 12.62s-4 11.54-9.53 11.54M209.53 125.63h-.33l-.99 1.41a5.7 5.7 0 0 1-5.22 2.72h-6.67v-11.28h5.9c1.75 0 2.82.58 3.82 2.07l.73 1.04h.23v-7.53h-.23l-.73 1.05c-1.01 1.49-2.07 2.07-3.82 2.07h-5.9v-11.03h6.67c2.37 0 3.84.78 5.22 2.74l.99 1.38h.33v-5.41h-18.68v.32l1.01.6a2.9 2.9 0 0 1 1.43 2.56v19.25c0 .99-.45 1.96-1.43 2.54l-1.01.6v.32h18.68v-5.43ZM141.86 131.45c2.8 2.85 5.9 4.68 10.57 5.74l.18-.36a17.3 17.3 0 0 1-6.69-5.87c5.46-1.52 9.3-6.48 9.3-12.96 0-8.05-5.93-13.5-12.93-13.5s-13.06 5.01-13.06 13.5c0 7.94 5.62 13.32 12.64 13.45Zm.05-25.57c5.93 0 10.11 5.46 10.11 12.77 0 6.48-3.92 11.41-9.48 11.41-5.96 0-10.13-5.18-10.13-12.51s3.92-11.67 9.5-11.67M13.77 117.53a6.34 6.34 0 0 0 5.33-6.14c0-3.82-2.24-6.53-8.52-6.53H0v.32l1 .6a2.9 2.9 0 0 1 1.44 2.56v19.25c0 .99-.47 1.96-1.44 2.54l-1 .6v.32h10.73c6.4 0 9.64-2.92 9.64-7.31 0-3.45-2.59-5.8-6.59-6.22Zm-8.28-11.38h5.09c2.85 0 5.33 2.19 5.33 5.33s-2.12 5.48-5.36 5.48H5.49zm5.11 23.61H5.5v-11.51h5.09c4.28 0 6.56 2.37 6.56 5.75 0 2.92-1.85 5.75-6.55 5.75ZM80.56 121.09v-12.75c0-1.01.45-1.98 1.43-2.56l1-.6v-.32h-6.14v.32l1.01.6a2.9 2.9 0 0 1 1.44 2.56v12.91c0 5.59-3.24 8.67-7.68 8.67-4.8 0-7.94-2.95-7.94-8.54v-13.04c0-1.01.45-1.98 1.41-2.56l1-.6v-.32h-7.91v.32l1.02.6a2.9 2.9 0 0 1 1.43 2.56v12.95c0 6.47 4.07 10.13 10.27 10.13 5.88 0 9.66-3.53 9.66-10.32ZM89.18 108.73a5.7 5.7 0 0 1 5.23-2.74H97v21.6c0 .99-.5 1.96-1.57 2.54l-1.1.6v.32h8.41v-.32l-1.12-.6a2.8 2.8 0 0 1-1.57-2.54v-21.6h2.58c2.38 0 3.86.78 5.25 2.74l.97 1.38h.31v-5.25H87.87v5.25h.32zM123.58 130.73l-1-.6a2.9 2.9 0 0 1-1.44-2.54v-19.25c0-1.01.45-1.98 1.44-2.56l1-.6v-.32h-7.94v.32l1.02.6a2.9 2.9 0 0 1 1.43 2.56v19.25c0 .99-.45 1.96-1.43 2.54l-1.02.6v.32h7.94z"></path></g></svg>
+    </div>
+  </div>
+
+  <div class="headline">
+    <div class="headline-ar">كـل عـام وأنـت بخيـر!</div>
+    <div class="headline-en">HAPPY BIRTHDAY!</div>
+  </div>
+
+  <div class="panel-wrap">
+    <div class="panel">
+      <div class="panel-cols">
+        <div class="col col-en">
+          <div class="salutation">Dear Munirah,</div>
+          <p class="card-text">Do you think we would let you work on your birthday?</p>
+          <span class="highlight">OF COURSE NOT!</span>
+          <p class="card-text">As a token of appreciation for all that you do, you are entitled to a birthday day off tomorrow to celebrate.</p>
+          <p class="card-text">Wishing you an early Happy Birthday, filled with happiness and <span class="joy">joy</span>!</p>
+        </div>
+        <div class="col col-ar">
+          <div class="salutation-ar">الزميلة منيرة،</div>
+          <p class="card-text-ar">على بالك إننا بنخليك تداومين في يوم ميلادك بكره؟</p>
+          <span class="highlight-ar">أكيد لا!</span>
+          <p class="card-text-ar">ومن باب الامتنان لكل ما تقدمينه، تستاهلين نهديك يوم إجازة بكرة.</p>
+          <p class="card-text-ar">يوم ميلاد سعيد مقدماً!</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="non-shareable">Non-Shareable</div>
+
+  <div class="notes">
+    <div class="col-en">
+      <div class="note-title">Note:</div>
+      <ul class="note-list">
+        <li>Please ensure that you submit your leave request through the system and select Employee Recognition Leave from the available leave options.</li>
+        <li>If your birthday falls on a weekend, your day off will automatically move to the next working day.</li>
+      </ul>
+    </div>
+    <div class="col-ar">
+      <div class="note-title-ar">ملاحظة:</div>
+      <ul class="note-list ar">
+        <li>يرجى التأكد من رفع طلب الإجازة عبر النظام، واختيار "Employee Recognition Leave" من ضمن خيارات الإجازات المتاحة.</li>
+        <li>في حال صادف يوم ميلادك عطلة نهاية الأسبوع، سينتقل يوم إجازتك تلقائيًا إلى أول يوم عمل بعده.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="footer">
+    <span class="en">A STORY OF HERITAGE AND HOSPITALITY</span>
+    <span class="ar">قصة تراث وضيافة</span>
+  </div>
+
+</div>
+</div>
+</div>
+
+<script>
+  // scale the fixed 1199x1600 card to fit any screen width
+  const BASE_W = 1199, BASE_H = 1600;
+  const page = document.getElementById('page');
+  const stageInner = document.getElementById('stageInner');
+  const stage = document.querySelector('.stage');
+
+  function fitCard(){
+    const available = Math.max(stage.clientWidth - 32, 40); // 16px gutter on each side
+    const scale = available / BASE_W;
+    page.style.transform = 'scale(' + scale + ')';
+    stageInner.style.width = (BASE_W * scale) + 'px';
+    stageInner.style.height = (BASE_H * scale) + 'px';
+  }
+
+  window.addEventListener('resize', fitCard);
+  window.addEventListener('orientationchange', fitCard);
+  fitCard();
+</script>
+</body>
+</html>
